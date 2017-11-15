@@ -5,4 +5,5 @@ gem "sinatra-activerecord"
 gem "sqlite3"
 gem "pry"
 gem "require_all"
-gem "byebug", "8.2.2" 
+gem "byebug", "8.2.2"
+gem 'catpix'
