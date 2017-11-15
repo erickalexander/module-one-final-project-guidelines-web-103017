@@ -10,7 +10,12 @@ class ReadCsv
   def read
     @csv.map do |row|
       row = row.to_hash
-      WorldCup.new({ year: row['YEAR'], location: row['LOCATION'], winner: row['WINNER'], runner_up: row['RUNNER_UP'],third_place: row['THIRD_PLACE'], fourth_place: row['FOURTH_PLACE'] })
+      WorldCup.create({ year: row['YEAR'], location: row['LOCATION'] })
+      Team.find_or_create_by({ name: row['LOCATION']})
+      Team.find_or_create_by({ name: row['WINNER']})
+      Team.find_or_create_by({ name: row['RUNNER_UP']})
+      Team.find_or_create_by({ name: row['THIRD_PLACE']})
+      Team.find_or_create_by({ name: row['FOURTH_PLACE']})
     end
   end
 end

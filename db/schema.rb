@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 20171115164106) do
 
   create_table "placements", force: :cascade do |t|
-    t.integer "worldcup_id"
+    t.integer "world_cup_id"
     t.integer "team_id"
     t.integer "placement"
   end
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 20171115164106) do
     t.string "name"
   end
 
-  create_table "worldcups", force: :cascade do |t|
+  create_table "world_cups", force: :cascade do |t|
     t.integer "year"
     t.text "location"
   end
