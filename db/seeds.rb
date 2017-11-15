@@ -9,9 +9,8 @@ class ReadCsv
 
   def read
     @csv.map do |row|
-      binding.pry
       row = row.to_hash
-      WorldCupData.new({ year: row['YEAR'], location: row['LOCATION'], winner: row['WINNER'], runner_up: row['RUNNER_UP'],third_place: row['THIRD_PLACE'], fourth_place: row['FOURTH_PLACE'] })
+      WorldCup.new({ year: row['YEAR'], location: row['LOCATION'], winner: row['WINNER'], runner_up: row['RUNNER_UP'],third_place: row['THIRD_PLACE'], fourth_place: row['FOURTH_PLACE'] })
     end
   end
 end
