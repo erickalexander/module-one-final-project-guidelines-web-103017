@@ -4,13 +4,13 @@ require_relative '../config/environment'
 
 class ReadCsv
   def initialize(file = './world_cup.csv')
-    @csv = CSV.new(File.read(file), headers: true)
+    @csv = CSV.new(File.read(File.join(File.dirname(__FILE__),"world_cup.csv")), headers: true)
   end
 
   def read
     @csv.map do |row|
-      row = row.to_hash
       binding.pry
+      row = row.to_hash
       WorldCupData.new({ year: row['YEAR'], location: row['LOCATION'], winner: row['WINNER'], runner_up: row['RUNNER_UP'],third_place: row['THIRD_PLACE'], fourth_place: row['FOURTH_PLACE'] })
     end
   end
