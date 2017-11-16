@@ -35,16 +35,29 @@ class CLI
     2) Look at FAQ's and get information from there."
   end
 
-  def user_input_team_info
-    user_input = gets.chomp
+  def user_input_team_info(input)
+
     team = Team.all.select do |team|
-      team.name == user_input
+      team.name == input
     end
-    #binding.pry
-    puts team.first.name
+    # binding.pry
+    championships = team.first.placements.where(placement: 1)
+    championship_years = championships.all.collect do |champ|
+      champ.world_cup.year
+    end
+    location = WorldCup.all.select do |worldcup|
+      worldcup.location == input
+    end
+    location_years = location.collect do |loc_year|
+      loc_year.year
+    end
+
+    puts "You have choosen #{team.first.name}, below is some statistics of this team in the WorldCup"
+    puts "#{team.first.name} has won #{championships.count} World Cup(s), in the year(s) #{championship_years}."
+    puts "#{team.first.name} has hosted #{location.count} World Cup(s), in the year(s) #{location_years}."
   end
 
-
+  def
 
   def start
     welcome
@@ -57,7 +70,14 @@ class CLI
       type_choice = gets.chomp
       if type_choice == 'A'
         puts "Enter a team name: "
-        user_input_team_info
+        user_input = gets.chomp
+        user_input_team(user_input)
+      elsif type_choice == 'B'
+        puts "Enter a year: "
+        user_input = gets.chomp
+        user_input_year(user_input)
+      end
+
       end
     end
   end
