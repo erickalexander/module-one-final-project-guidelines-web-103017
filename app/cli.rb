@@ -57,7 +57,38 @@ class CLI
     puts "#{team.first.name} has hosted #{location.count} World Cup(s), in the year(s) #{location_years}."
   end
 
-  def
+  def user_input_year(input)
+    wc_instance = WorldCup.all.select do |wc|
+      wc.year == input.to_i
+    end
+
+    champion = wc_instance.first.placements.where(placement: 1).first.team.name
+    second = wc_instance.first.placements.where(placement: 2).first.team.name
+    third = wc_instance.first.placements.where(placement: 3).first.team.name
+    fourth = wc_instance.first.placements.where(placement: 4).first.team.name
+    # binding.pry
+    puts "You have choosen the year #{wc_instance.first.year}, below you will find details of the World Cup of that year."
+    puts "FIFA WORLD CUP #{wc_instance.first.year}
+    + Location: #{wc_instance.first.location}
+    + Winner: #{champion}
+    + 2nd Place: #{second}
+    + 3rd Place: #{third}
+    + 4th Place: #{fourth}
+    + Number of Teams: #{wc_instance.first.num_teams}
+    + Total Goals Scored: #{wc_instance.first.goals}
+    + Average Goals Per Game: #{wc_instance.first.average_goals_per_game}
+    + Average Attendance Per Game: #{wc_instance.first.average_attendance_per_game}"
+  end
+
+  def faq
+    puts "Here are some of the most common FAQs
+    1) Who is the most recent world cup winner?
+    2) Which country has the most World cup championships?
+    3) Which world cup averaged the most attendance per game?
+    4) Who has hosted the most world cups?
+    5) Where was the last world cup hosted?"
+
+  end
 
   def start
     welcome
@@ -78,7 +109,10 @@ class CLI
         user_input_year(user_input)
       end
 
-      end
+    elsif input_option == '2'
+      faq
+
+
     end
   end
 end
