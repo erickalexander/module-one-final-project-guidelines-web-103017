@@ -85,9 +85,42 @@ class CLI
     1) Who is the most recent world cup winner?
     2) Which country has the most World cup championships?
     3) Which world cup averaged the most attendance per game?
-    4) Who has hosted the most world cups?
+    4) Which country has made it to the top 4 the most?
     5) Where was the last world cup hosted?"
+  end
 
+  def recent_wc_winner
+    wc_instance = WorldCup.all
+    champion = wc_instance.first.placements.where(placement: 1).first.team.name
+    puts "The most recent winner is #{champion}"
+  end
+  def most_wc_winner
+    winners = Placement.all.where(placement: 1)
+    hsh = winners.group(:team_id).count
+    max_wc = winners.group(:team_id).count.values.max
+    most_winner_id = hsh.key(max_wc)
+    winner = Team.all.where(id: most_winner_id).first.name
+    puts "The country with the most world cups is #{winner}, they have won #{max_wc}"
+  end
+
+  def most_wc_attendance
+
+    group = WorldCup.all.group(:average_attendance_per_game)
+
+    puts "#{group.last.location} averaged the most attendance per game, their average attendance was #{group.last.average_attendance_per_game}"
+
+  end
+
+  def most_playoffs
+    hsh = Placement.all.group(:team_id).count
+    max_playoff = hsh.values.max
+    max_playoff_name_key = hsh.key(max_playoff)
+    playoff_name_string = Team.all.where(id: max_playoff_name_key).first.name
+    puts "The country that has made it to the top 4 the most is, #{playoff_name_string}, they made it #{max_playoff} times."
+  end
+
+  def last_host
+    puts "#{WorldCup.first.location} hosted the most recent World Cup held in #{WorldCup.first.year}"
   end
 
   def start
@@ -111,7 +144,18 @@ class CLI
 
     elsif input_option == '2'
       faq
-
+      user_input = gets.chomp
+      if user_input == '1'
+        recent_wc_winner
+      elsif user_input == '2'
+        most_wc_winner
+      elsif user_input == '3'
+        most_wc_attendance
+      elsif user_input == '4'
+        most_playoffs
+      elsif user_input == '5'
+        last_host
+      end
 
     end
   end
