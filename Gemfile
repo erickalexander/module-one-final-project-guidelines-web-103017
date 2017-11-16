@@ -7,3 +7,4 @@ gem "pry"
 gem "require_all"
 gem "byebug", "8.2.2"
 gem 'catpix'
+gem "table_print"
