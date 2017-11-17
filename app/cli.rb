@@ -32,7 +32,9 @@ class CLI
   def options
     puts "What will you like to do?:
     1) Enter a team or year and get info on any of those.
-    2) Look at FAQ's and get information from there."
+    2) Look at FAQ's and get information from there.
+    3) Check out Rankings
+    --- 'exit' to quit program ---"
   end
 
   def user_input_team_info(input)
@@ -53,8 +55,16 @@ class CLI
     end
 
     puts "You have choosen #{team.first.name}, below is some statistics of this team in the WorldCup"
-    puts "#{team.first.name} has won #{championships.count} World Cup(s), in the year(s) #{championship_years}."
-    puts "#{team.first.name} has hosted #{location.count} World Cup(s), in the year(s) #{location_years}."
+    if championship_years.count > 0
+      puts "#{team.first.name} has won #{championships.count} World Cup(s), in the year(s) #{championship_years}."
+    else
+      puts "#{team.first.name} has not won any world cups"
+    end
+    if location_years.count > 0
+      puts "#{team.first.name} has hosted #{location.count} World Cup(s), in the year(s) #{location_years}."
+    else
+      puts "#{team.first.name} hasn't hosted any world cups."
+    end
   end
 
   def user_input_year(input)
@@ -126,37 +136,41 @@ class CLI
   def start
     welcome
     img
-    options
-    input_option = gets.chomp
-    if input_option == '1'
-      teams_years
-      puts"Choose the type of input you want team or year (A or B)"
-      type_choice = gets.chomp
-      if type_choice == 'A'
-        puts "Enter a team name: "
-        user_input = gets.chomp
-        user_input_team(user_input)
-      elsif type_choice == 'B'
-        puts "Enter a year: "
-        user_input = gets.chomp
-        user_input_year(user_input)
-      end
 
-    elsif input_option == '2'
-      faq
-      user_input = gets.chomp
-      if user_input == '1'
-        recent_wc_winner
-      elsif user_input == '2'
-        most_wc_winner
-      elsif user_input == '3'
-        most_wc_attendance
-      elsif user_input == '4'
-        most_playoffs
-      elsif user_input == '5'
-        last_host
-      end
+    loop do
+      options
+      input_option = gets.chomp
+      if input_option == '1'
+        teams_years
+        puts"Choose the type of input you want team or year (A or B)"
+        type_choice = gets.chomp
+        if type_choice == 'A'
+          puts "Enter a team name: "
+          user_input = gets.chomp
+          user_input_team_info(user_input)
+        elsif type_choice == 'B'
+          puts "Enter a year: "
+          user_input = gets.chomp
+          user_input_year(user_input)
+        end
 
+      elsif input_option == '2'
+        faq
+        user_input = gets.chomp
+        if user_input == '1'
+          recent_wc_winner
+        elsif user_input == '2'
+          most_wc_winner
+        elsif user_input == '3'
+          most_wc_attendance
+        elsif user_input == '4'
+          most_playoffs
+        elsif user_input == '5'
+          last_host
+        end
+      elsif input_option == 'exit'
+        return puts "Goodbye come back soon to learn more about next years world cup"
+      end
     end
   end
 end
