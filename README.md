@@ -10,6 +10,7 @@ a member of the Github community and adding some data myself, I developed a CLI 
 Download this file from Github and enter 'ruby bin/run.rb' to to run the CLI.
 
 #Contributors Guide
+
 This project adheres to the Open Code of Conduct
 
 #Contributors
