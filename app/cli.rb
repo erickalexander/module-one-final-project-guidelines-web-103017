@@ -33,7 +33,6 @@ class CLI
     puts "What will you like to do?:
     1) Enter a team or year and get info on any of those.
     2) Look at FAQ's and get information from there.
-    3) Check out Rankings
     --- 'exit' to quit program ---"
   end
 
@@ -132,6 +131,16 @@ class CLI
   def last_host
     puts "#{WorldCup.first.location} hosted the most recent World Cup held in #{WorldCup.first.year}"
   end
+
+  def ranking_info
+    puts " -----------------------
+    You can rank by the following:
+    A) Most World Cup Championships
+    B) Most World Cup Host
+    C) Most World Cup Top 4"
+
+  end
+
 
   def start
     welcome
