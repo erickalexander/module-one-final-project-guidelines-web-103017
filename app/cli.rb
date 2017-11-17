@@ -153,6 +153,8 @@ class CLI
         teams_years
         puts"Choose the type of input you want team or year (A or B)"
         type_choice = gets.chomp
+        puts "---------------------"
+        puts "---------------------"
         if type_choice == 'A'
           puts "Enter a team name: "
           user_input = gets.chomp
@@ -162,10 +164,13 @@ class CLI
           user_input = gets.chomp
           user_input_year(user_input)
         end
-
+        puts "---------------------"
+        puts "---------------------"
       elsif input_option == '2'
         faq
         user_input = gets.chomp
+        puts "---------------------"
+        puts "---------------------"
         if user_input == '1'
           recent_wc_winner
         elsif user_input == '2'
@@ -177,6 +182,8 @@ class CLI
         elsif user_input == '5'
           last_host
         end
+        puts "---------------------"
+        puts "---------------------"
       elsif input_option == 'exit'
         return puts "Goodbye come back soon to learn more about next years world cup"
       end
